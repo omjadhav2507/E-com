@@ -20,6 +20,15 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+// All Routes
+
+const AdminLoginRoute = require('./routes/Admin/AdminLogin');
+
+
+// All Routes API
+app.use('/adminloginapi', AdminLoginRoute);
+
+
 const PORT = process.env.PORT || 5001;
 
 app.get('/', (req, res) => {
@@ -29,3 +38,4 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Running on port: ${PORT}`);
 });
+
