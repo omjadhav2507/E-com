@@ -1,15 +1,20 @@
-import { useState } from 'react'
+import React from 'react';
+import { BrowserRouter as Router, Routes , Route,  } from 'react-router-dom';
+import AdminHome from './AdminPages/AdminHome';
+import AdminLogin from './AdminPages/AdminLogin'
 
-import './App.css'
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      ok
-    </>
-  )
+    <Router>
+      <Routes>
+      <Route path="/"  element={<AdminLogin/>}/>
+      <Route path="/Adminhome"  element={<AdminHome/>}/>
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
