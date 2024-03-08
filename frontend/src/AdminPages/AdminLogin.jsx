@@ -29,10 +29,10 @@ function AdminLogin() {
       if (res.data.sts === 0) {
         alert("Login successful:", res.data);
         localStorage.setItem('aid', res.data.aid);
-        localStorage.setItem('email', res.data.email);
+        localStorage.setItem('aemail', res.data.aemail);
         localStorage.setItem('aname', res.data.aname);
         localStorage.setItem('token', res.data.token);
-
+           
         // Redirect to the AdminHome page
         navigate('/AdminHome');
       } else {
