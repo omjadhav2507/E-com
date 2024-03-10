@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import AdminNav from "../components/AdminNav";
 
 function AdminHome() {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ function AdminHome() {
   return (
     <>
       <div>AdminHome </div>
+      <AdminNav/>
       <h2> welcome {aname}</h2>
     </>
   );

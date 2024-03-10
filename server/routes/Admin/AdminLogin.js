@@ -67,6 +67,22 @@ router.post('/login', async (req, res) => {
 });
 
 
+router.post('/checkentoken', async(req,res)=>{
+    const token = req.body.token
+
+    try {
+        const tokenchk = await AdminToken.findOne({token})
+        if (!tokenchk) {
+            return res.json({ "tokensts":1}) // no token 
+        } else {
+            return res.json({ "tokensts":0}) // token found
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+ 
+})
+
 
 
 module.exports = router
