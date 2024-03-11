@@ -83,6 +83,46 @@ router.post('/checkentoken', async(req,res)=>{
  
 })
 
+// http://localhost:5001/adminloginapi/updatepass
+router.post('/updatepass', async (req, res) => {
+    const adminEmail = req.body.adminEmail;
+    const oldpass = req.body.oldpass;
+    const newpass = req.body.newpass;
+
+    try {
+        const passchk = await Admin.findOne({ adminEmail });
+
+        if (passchk && await bcrypt.compare(oldpass, passchk.adminPass)) {
+            console.log({ "msg": "Old password is matched" });
+
+            const updateAdminPass = await Admin.findOneAndUpdate(
+                { adminEmail: adminEmail },
+                { adminPass: await bcrypt.hash(newpass, 12) },
+                { new: true }
+            );
+
+            if (updateAdminPass) {
+                console.log({ "msg": "Password is changed in the database" });
+                res.json({
+                    "csts": 0, "msg": "Password is changed"
+                });
+            } else {
+                console.log("Password update failed");
+                res.json({
+                    "csts": 1, "msg": "Password is not changed in the database"
+                });
+            }
+        } else {
+            console.log({ "msg": "Old password does not match" });
+            res.json({
+                "csts": 1, "msg": "Password is not changed"
+            });
+        }
+    } catch (error) {
+        console.error("Update Password Error:", error);
+        res.status(500).json({ error: error.message });
+    }
+});
 
 
 module.exports = router
