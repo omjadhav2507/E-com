@@ -1,7 +1,34 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import axios from 'axios';
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 function AdminNav() {
+  const aid = localStorage.getItem("aid");
+  const aemail = localStorage.getItem("aemail");
+  const aname = localStorage.getItem("aname");
+  const token = localStorage.getItem("token");
+
+  const [tokendt,setTokendt] = useState({
+    token
+  })
+
+  const navigate = useNavigate()
+
+  const logout = async (e)=>{
+    const res = await axios.post("http://localhost:5001/adminloginapi/logout",tokendt)
+    if(res.data.logoutsts === 0){
+      alert("logout okay")
+      localStorage.removeItem('token')
+      localStorage.removeItem('aid')
+      localStorage.removeItem('aemail')
+      localStorage.removeItem('aname')
+      navigate('/')
+    }else{
+      console.error(error)
+      alert(" logout failed")
+    }
+    
+  }
   return (
     <>
         <header class="p-3 bg-dark text-white">
@@ -25,7 +52,7 @@ function AdminNav() {
 
         <div class="text-end">
          <Link to='/adminchangepass'> <button type="button" class="btn btn-outline-light me-2">Change password</button></Link>
-          <button type="button" class="btn btn-warning">Logout</button>
+          <button type="button" class="btn btn-warning" onClick={logout}>Logout</button>
         </div>
       </div>
     </div>

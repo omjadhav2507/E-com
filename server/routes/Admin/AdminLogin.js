@@ -82,6 +82,22 @@ router.post('/checkentoken', async(req,res)=>{
     }
  
 })
+// http://localhost:5001/adminloginapi/logout
+router.post('/logout', async(req,res)=>{
+    const token = req.body.token
+
+    try {
+        const logout = await AdminToken.findOneAndDelete({token})
+        if (!logout) {
+            return res.json({ "logoutsts":1 ,"msg":"Logout failed"}) // no token 
+        } else {
+            return res.json({ "logoutsts":0 ,"msg":"Logout okay"}) // token found
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+ 
+})
 
 // http://localhost:5001/adminloginapi/updatepass
 router.post('/updatepass', async (req, res) => {

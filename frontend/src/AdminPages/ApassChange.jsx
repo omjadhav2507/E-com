@@ -55,7 +55,7 @@ function ApassChange() {
                     New Password:
                     <input type="password" name="newpass" placeholder="New Password" onChange={handleInputChange} />
                 </label>
-                <button type="submit" disabled={!cpass.oldpass || !cpass.newpass}>
+                <button type="submit">
                     Change Password
                 </button>
             </form>
