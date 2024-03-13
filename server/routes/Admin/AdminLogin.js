@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const Admin = require('../../models/Admin')
 const AdminToken = require('../../models/AdminToken')
+const ApassReset = require('../../models/ApassReset');
 const express = require('express')
 const  bcrypt = require('bcryptjs')
 const jwt = require("jsonwebtoken")
